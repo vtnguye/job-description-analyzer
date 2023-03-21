@@ -17,7 +17,7 @@ const JDForm = ({ afterSubmit }: JDFormProps) => {
     console.log(jobDescription);
   };
   return (
-    <div className="container">
+    <div className="container mt-5">
       <div className="row">
         <div className="col">
           <form

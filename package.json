@@ -10,10 +10,14 @@
   },
   "dependencies": {
     "bootstrap": "^5.2.3",
+    "install": "^0.13.0",
+    "openai": "^3.2.1",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/node": "^18.15.5",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",
