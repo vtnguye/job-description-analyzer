@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Component, useState } from "react";
 import JDForm from "./JDForm";
-import Summary from "./Summary";
+import JDAnalysis from "./JDAnalysis";
 
 const Main = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -14,7 +14,7 @@ const Main = () => {
         <h1 className="align-middle">Job Description Analyzer</h1>
       </div>
       <JDForm afterSubmit={handleSubmission} />
-      {isSubmitted && <Summary />}
+      {isSubmitted && <JDAnalysis analysis="a" />}
     </>
   );
 };
