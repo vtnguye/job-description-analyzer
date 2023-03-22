@@ -1,12 +1,18 @@
 import { ChangeEvent, Component, useState } from "react";
 import React from "react";
+import analyzeJobDescription from "../services/JDAnalysisServices";
 
+interface Analysis {
+  summary: string;
+  questions: string;
+}
 interface JDFormProps {
-  afterSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  afterSubmit: (analysis: Analysis) => void;
 }
 
 const JDForm = ({ afterSubmit }: JDFormProps) => {
   const [jobDescription, setjobDescription] = useState("");
+  const [analysis, setAnalysis] = useState<Analysis>({} as Analysis);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setjobDescription(e.target.value);
@@ -14,7 +20,10 @@ const JDForm = ({ afterSubmit }: JDFormProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(jobDescription);
+    analyzeJobDescription(jobDescription).then((data: any) => {
+      setAnalysis({ summary: data[0].summary, questions: data[0].questions });
+      afterSubmit(analysis);
+    });
   };
   return (
     <div className="container mt-5">
@@ -23,7 +32,6 @@ const JDForm = ({ afterSubmit }: JDFormProps) => {
           <form
             onSubmit={(e) => {
               handleSubmit(e);
-              afterSubmit(e);
             }}
           >
             <div className="form-group">
