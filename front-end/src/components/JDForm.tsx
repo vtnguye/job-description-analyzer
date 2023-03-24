@@ -20,8 +20,12 @@ const JDForm = ({ afterSubmit }: JDFormProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     analyzeJobDescription(jobDescription).then((data: any) => {
-      setAnalysis({ summary: data[0].summary, questions: data[0].questions });
-      afterSubmit(analysis);
+      const updatedAnalysis = {
+        summary: data[0].summary,
+        questions: data[0].questions,
+      };
+      setAnalysis(updatedAnalysis);
+      afterSubmit(updatedAnalysis);
     });
   };
   return (

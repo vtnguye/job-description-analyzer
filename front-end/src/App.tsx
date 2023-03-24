@@ -13,13 +13,11 @@ const App = () => {
     };
   }, []);
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [analysis, setAnalysis] = useState<IAnalysis>({} as IAnalysis);
-  const [showGreeting, setShowGreeting] = useState(true);
 
   const handleSubmission = (analysis: IAnalysis) => {
-    setIsSubmitted(true);
     setAnalysis(analysis);
+    console.log("Analysis submitted: ", analysis);
   };
   return (
     <>
@@ -27,7 +25,7 @@ const App = () => {
         <PageHeader />
         <div className="main">
           <JDForm afterSubmit={handleSubmission} />
-          {isSubmitted && <JDAnalysis result={analysis} />}
+          {Object.keys(analysis).length > 0 && <JDAnalysis result={analysis} />}
         </div>
       </div>
     </>

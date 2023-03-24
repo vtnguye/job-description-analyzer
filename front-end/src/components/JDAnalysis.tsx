@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Col, Tab, Tabs, Card } from "react-bootstrap";
 import IAnalysis from "../shared/interfaces/IAnalysis";
 interface JDAnalysisProps {
@@ -6,8 +6,11 @@ interface JDAnalysisProps {
 }
 
 const JDAnalysis = ({ result }: JDAnalysisProps) => {
-  console.log(result);
-  const [key, setKey] = useState("home");
+  const [analysis, setAnalysis] = useState<IAnalysis>(result);
+  useEffect(() => {
+    setAnalysis(result);
+  }, [result]);
+  const [key, setKey] = useState("summary");
   return (
     <>
       <Row>
@@ -25,10 +28,10 @@ const JDAnalysis = ({ result }: JDAnalysisProps) => {
                 className="mb-3"
               >
                 <Tab eventKey="summary" title="Summary">
-                  <Card.Text>{result.summary}</Card.Text>
+                  <Card.Text>{analysis.summary}</Card.Text>
                 </Tab>
                 <Tab eventKey="questions" title="Questions">
-                  <Card.Text>{result.questions}</Card.Text>
+                  <Card.Text>{analysis.questions}</Card.Text>
                 </Tab>
               </Tabs>
             </Card.Body>
