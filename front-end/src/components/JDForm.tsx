@@ -1,18 +1,17 @@
-import { ChangeEvent, Component, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import React from "react";
 import analyzeJobDescription from "../services/JDAnalysisServices";
+import { Row, Col, Form, Button, Card } from "react-bootstrap";
+import IAnalysis from "../shared/interfaces/IAnalysis";
+import Square from "../shared/decor/Squares";
 
-interface Analysis {
-  summary: string;
-  questions: string;
-}
 interface JDFormProps {
-  afterSubmit: (analysis: Analysis) => void;
+  afterSubmit: (analysis: IAnalysis) => void;
 }
 
 const JDForm = ({ afterSubmit }: JDFormProps) => {
   const [jobDescription, setjobDescription] = useState("");
-  const [analysis, setAnalysis] = useState<Analysis>({} as Analysis);
+  const [analysis, setAnalysis] = useState<IAnalysis>({} as IAnalysis);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setjobDescription(e.target.value);
@@ -26,32 +25,40 @@ const JDForm = ({ afterSubmit }: JDFormProps) => {
     });
   };
   return (
-    <div className="container mt-5">
-      <div className="row">
-        <div className="col">
-          <form
-            onSubmit={(e) => {
-              handleSubmit(e);
-            }}
-          >
-            <div className="form-group">
-              <label htmlFor="textarea">Your Job Description:</label>
-              <textarea
-                className="form-control"
-                id="textarea"
-                value={jobDescription}
-                onChange={handleChange}
-                placeholder="Paste your text here"
-              />
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </form>
-        </div>
-        <div className="col"></div>
-      </div>
-    </div>
+    <>
+      <Square />
+      <Row>
+        <Col></Col>
+        <Col md={8}>
+          <div className="title">
+            <h3 className="mb-3">Job Descriptions</h3>
+          </div>
+          <Card>
+            <Card.Body>
+              <Form
+                onSubmit={(e) => {
+                  handleSubmit(e);
+                }}
+              >
+                <Form.Group controlId="formJD">
+                  <Form.Control
+                    as="textarea"
+                    value={jobDescription}
+                    onChange={handleChange}
+                    placeholder="Paste your job description here"
+                    rows={8}
+                  />
+                </Form.Group>
+                <Button type="submit" variant="primary">
+                  Submit
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col></Col>
+      </Row>
+    </>
   );
 };
 
