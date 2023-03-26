@@ -4,6 +4,8 @@ import JDAnalysis from "./components/JDAnalysis";
 import JDForm from "./components/JDForm";
 import PageHeader from "./components/PageHeader";
 import IAnalysis from "./shared/interfaces/IAnalysis";
+import "./App.css";
+import { Container } from "react-bootstrap";
 
 const App = () => {
   useEffect(() => {
@@ -17,17 +19,14 @@ const App = () => {
 
   const handleSubmission = (analysis: IAnalysis) => {
     setAnalysis(analysis);
-    console.log("Analysis submitted: ", analysis);
   };
   return (
     <>
-      <div className="wrapper">
-        <PageHeader />
-        <div className="main">
-          <JDForm afterSubmit={handleSubmission} />
-          {Object.keys(analysis).length > 0 && <JDAnalysis result={analysis} />}
-        </div>
-      </div>
+      <PageHeader />
+      <Container fluid className="main">
+        <JDForm afterSubmit={handleSubmission} />
+        {Object.keys(analysis).length > 0 && <JDAnalysis result={analysis} />}
+      </Container>
     </>
   );
 };

@@ -1,7 +1,7 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import React from "react";
 import analyzeJobDescription from "../services/JDAnalysisServices";
-import { Row, Col, Form, Button, Card } from "react-bootstrap";
+import { Row, Col, Form, Button, Card, Container } from "react-bootstrap";
 import IAnalysis from "../shared/interfaces/IAnalysis";
 import Square from "../shared/decor/Squares";
 
@@ -12,6 +12,11 @@ interface JDFormProps {
 const JDForm = ({ afterSubmit }: JDFormProps) => {
   const [jobDescription, setjobDescription] = useState("");
   const [analysis, setAnalysis] = useState<IAnalysis>({} as IAnalysis);
+  useEffect(() => {
+    if (analysis.summary && analysis.questions) {
+      afterSubmit(analysis);
+    }
+  }, [analysis, afterSubmit]);
 
   const handleChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setjobDescription(e.target.value);
@@ -25,7 +30,6 @@ const JDForm = ({ afterSubmit }: JDFormProps) => {
         questions: data[0].questions,
       };
       setAnalysis(updatedAnalysis);
-      afterSubmit(updatedAnalysis);
     });
   };
   return (
@@ -53,7 +57,7 @@ const JDForm = ({ afterSubmit }: JDFormProps) => {
                     rows={8}
                   />
                 </Form.Group>
-                <Button type="submit" variant="primary">
+                <Button className="mt-5" type="submit" variant="primary">
                   Submit
                 </Button>
               </Form>

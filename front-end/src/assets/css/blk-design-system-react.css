@@ -23663,10 +23663,9 @@ td.rdtYear:hover {
 .blockquote.blockquote-info small {
   color: #1d8cf8;
 }
-.scroll-container {
-  display: flex;
-  overflow-x: auto;
-  white-space: nowrap;
+
+.main {
+  height: 100vh;
 }
 
 /*# sourceMappingURL=blk-design-system-react.css.map */

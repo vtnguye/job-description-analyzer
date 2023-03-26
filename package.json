@@ -1,0 +1,10 @@
+{
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  },
+  "scripts": {
+    "dev": "npm-run-all --parallel start:**",
+    "start:backend": "cd back-end && python analysis.py",
+    "start:frontend": "cd front-end && npm run dev"
+  }
+}

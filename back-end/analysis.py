@@ -23,15 +23,18 @@ def analyze_job_description():
     final_results = list()
     job_description = request.json['job_description']
     prompts = [
-        'Summarize this job description',
-        'Come up with interview questions for this job description',
+        'Summarize this job description for an applicant:',
+        'I am applying for this job, what could be possible questions for this job description:',
     ]
+
     for prompt in prompts:
-        prompt += job_description
+        prompt_with_description = prompt + ' ' + job_description
         completions = openai.ChatCompletion.create(
             model=MODEL,
-            temperature=0,
-            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3,
+            messages=[{"role": "user", "content": prompt_with_description}],
+            stop=None,
+            timeout=15,
         )
         final_results.append(completions.choices[0].message.content)
     return jsonify([{
