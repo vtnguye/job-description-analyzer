@@ -41,28 +41,24 @@ const JDForm = ({ afterSubmit }: JDFormProps) => {
           <div className="title">
             <h3 className="mb-3">Job Descriptions</h3>
           </div>
-          <Card>
-            <Card.Body>
-              <Form
-                onSubmit={(e) => {
-                  handleSubmit(e);
-                }}
-              >
-                <Form.Group controlId="formJD">
-                  <Form.Control
-                    as="textarea"
-                    value={jobDescription}
-                    onChange={handleChange}
-                    placeholder="Paste your job description here"
-                    rows={8}
-                  />
-                </Form.Group>
-                <Button className="mt-5" type="submit" variant="primary">
-                  Submit
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
+          <Form
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            <Form.Group controlId="formJD">
+              <Form.Control
+                as="textarea"
+                value={jobDescription}
+                onChange={handleChange}
+                placeholder="Paste your job description here"
+                style={{ minHeight: "20vh" }}
+              />
+            </Form.Group>
+            <Button className="mt-3" type="submit" variant="primary">
+              Submit
+            </Button>
+          </Form>
         </Col>
         <Col></Col>
       </Row>
