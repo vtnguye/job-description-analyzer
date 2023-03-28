@@ -52,7 +52,6 @@ const JDForm = ({ afterSubmit }: JDFormProps) => {
                 value={jobDescription}
                 onChange={handleChange}
                 placeholder="Paste your job description here"
-                style={{ minHeight: "20vh" }}
               />
             </Form.Group>
             <Button className="mt-3" type="submit" variant="primary">
